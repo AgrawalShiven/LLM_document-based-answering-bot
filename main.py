@@ -10,9 +10,15 @@ import fitz
 import re
 import matplotlib
 matplotlib.use("Agg")
+import os
+TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
+
+if not TOGETHER_API_KEY:
+    import streamlit as st
+    st.error("API key not found. Please set TOGETHER_API_KEY as a repository variable.")
+    st.stop()
 
 
-TOGETHER_API_KEY = "c9c7347965c2d0e4e738e128e2247f102950c6a1825c0c96755c3d268f2098d3"
 MODEL_NAME = "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8"
 
 def split_response(response):
